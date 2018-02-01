@@ -1,0 +1,3 @@
+rootProject.name = 'FlexExercise'
+
+include ':app'
