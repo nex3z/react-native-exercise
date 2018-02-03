@@ -14,8 +14,9 @@ export default class App extends Component<{}> {
   constructor(props) {
     super(props);
     this.state = {
-      selected: 0,
-      flexDirectionSelectedIdx: 0
+      selected: 1,
+      flexDirectionStyleIdx: 0,
+      alignItemsStyleIdx: 1
     }
   }
 
@@ -23,19 +24,24 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <View style={this.buildParentStyle()}>
-          <TouchableOpacity style={[styles.item0, (this.state.selected === 0) && styles.selected]}
-            onPress={()=>this.selectItem(0)}/>
           <TouchableOpacity style={[styles.item1, (this.state.selected === 1) && styles.selected]}
             onPress={()=>this.selectItem(1)}/>
           <TouchableOpacity style={[styles.item2, (this.state.selected === 2) && styles.selected]}
             onPress={()=>this.selectItem(2)}/>
+          <TouchableOpacity style={[styles.item3, (this.state.selected === 3) && styles.selected]}
+            onPress={()=>this.selectItem(3)}/>
         </View>
         <View style={styles.controlContainer}>
-          <Text style={styles.controlLabel} >Parent Flex Direction</Text>
+          <Text style={styles.controlLabel} >Parent flexDirection</Text>
           <SegmentedControlTab 
             values={flexDirections}
-            selectedIndex={this.state.flexDirectionSelectedIdx}
-            onTabPress={(index) => { this.setState({ flexDirectionSelectedIdx: index }) }}/>
+            selectedIndex={this.state.flexDirectionStyleIdx}
+            onTabPress={(index) => { this.setState({ flexDirectionStyleIdx: index }) }}/>
+          <Text style={styles.controlLabel} >Parent alignItems</Text>
+          <SegmentedControlTab 
+            values={alignItems}
+            selectedIndex={this.state.alignItemsStyleIdx}
+            onTabPress={(index) => { this.setState({ alignItemsStyleIdx: index }) }}/>
         </View>
       </View>
     );
@@ -45,8 +51,8 @@ export default class App extends Component<{}> {
     return StyleSheet.create({
       style: {
         height: 120,
-        flexDirection: flexDirections[this.state.flexDirectionSelectedIdx],
-        alignItems: 'center',
+        flexDirection: flexDirections[this.state.flexDirectionStyleIdx],
+        alignItems: alignItems[this.state.alignItemsStyleIdx],
         justifyContent: 'space-around',
         backgroundColor: 'lightgrey'
       }
@@ -61,6 +67,7 @@ export default class App extends Component<{}> {
 }
 
 const flexDirections = ['row', 'column'];
+const alignItems = ['flex-start', 'center', 'flex-end', 'stretch'];
 
 const styles = StyleSheet.create({
   container: {
@@ -69,19 +76,19 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: 'white'
   },
-  item0: {
-    width: 60,
-    height: 30,
+  item1: {
+    minWidth: 60,
+    minHeight: 30,
     backgroundColor: 'crimson',
   },
-  item1: {
-    width: 60,
-    height: 30,
+  item2: {
+    minWidth: 60,
+    minHeight: 30,
     backgroundColor: 'gold'
   },
-  item2: {
-    width: 60,
-    height: 30,
+  item3: {
+    minWidth: 60,
+    minHeight: 30,
     backgroundColor: 'dodgerblue'
   },
   selected: {
