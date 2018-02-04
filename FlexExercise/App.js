@@ -16,7 +16,8 @@ export default class App extends Component<{}> {
     this.state = {
       selected: 1,
       flexDirectionStyleIdx: 0,
-      alignItemsStyleIdx: 1
+      alignItemsStyleIdx: 1,
+      justifyContentStyleIdx: 4
     }
   }
 
@@ -42,6 +43,11 @@ export default class App extends Component<{}> {
             values={alignItems}
             selectedIndex={this.state.alignItemsStyleIdx}
             onTabPress={(index) => { this.setState({ alignItemsStyleIdx: index }) }}/>
+          <Text style={styles.controlLabel} >Parent justifyContent</Text>
+          <SegmentedControlTab 
+            values={justifyContent}
+            selectedIndex={this.state.justifyContentStyleIdx}
+            onTabPress={(index) => { this.setState({ justifyContentStyleIdx: index }) }}/>
         </View>
       </View>
     );
@@ -53,7 +59,7 @@ export default class App extends Component<{}> {
         height: 120,
         flexDirection: flexDirections[this.state.flexDirectionStyleIdx],
         alignItems: alignItems[this.state.alignItemsStyleIdx],
-        justifyContent: 'space-around',
+        justifyContent: justifyContent[this.state.justifyContentStyleIdx],
         backgroundColor: 'lightgrey'
       }
     }).style;
@@ -68,6 +74,7 @@ export default class App extends Component<{}> {
 
 const flexDirections = ['row', 'column'];
 const alignItems = ['flex-start', 'center', 'flex-end', 'stretch'];
+const justifyContent = ['flex-start', 'center', 'flex-end', 'space-around', 'space-between'];
 
 const styles = StyleSheet.create({
   container: {
