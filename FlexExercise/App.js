@@ -17,7 +17,7 @@ export default class App extends Component<{}> {
       selected: 1,
       flexDirectionStyleIdx: 0,
       alignItemsStyleIdx: 1,
-      justifyContentStyleIdx: 4
+      justifyContentStyleIdx: 3
     }
   }
 
@@ -44,10 +44,14 @@ export default class App extends Component<{}> {
             selectedIndex={this.state.alignItemsStyleIdx}
             onTabPress={(index) => { this.setState({ alignItemsStyleIdx: index }) }}/>
           <Text style={styles.controlLabel} >Parent justifyContent</Text>
-          <SegmentedControlTab 
-            values={justifyContent}
+          <SegmentedControlTab tabsContainerStyle={{paddingBottom: 4}}
+            values={justifyContent.slice(0, 3)}
             selectedIndex={this.state.justifyContentStyleIdx}
             onTabPress={(index) => { this.setState({ justifyContentStyleIdx: index }) }}/>
+          <SegmentedControlTab
+            values={justifyContent.slice(3, 5)}
+            selectedIndex={this.state.justifyContentStyleIdx - 3}
+            onTabPress={(index) => { this.setState({ justifyContentStyleIdx: index + 3 }) }}/>
         </View>
       </View>
     );
